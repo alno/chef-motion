@@ -1,0 +1,14 @@
+check process motion
+  with pidfile <%= @pid_file %>
+
+  start program = "/usr/sbin/service motion start"
+  stop program = "/usr/sbin/service motion stop"
+  restart program = "/usr/sbin/service motion restart"
+
+<%- @threads.keys.sort.each do |name| -%>
+  if failed port <%= @threads[name][:port] %> protocol HTTP
+    request '/'
+    with timeout 5 seconds
+    then restart
+
+<%- end -%>
