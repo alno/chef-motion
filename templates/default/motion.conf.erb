@@ -239,7 +239,7 @@ ffmpeg_variable_bitrate 0
 # flv - gives you a flash video with extension .flv
 # ffv1 - FF video codec 1 for Lossless Encoding ( experimental )
 # mov - QuickTime ( testing )
-ffmpeg_video_codec swf
+ffmpeg_video_codec <%= @video_codec or 'swf' %>
 
 # Use ffmpeg to deinterlace video. Necessary if you use an analog camera
 # and see horizontal combing on moving objects in video or pictures.
