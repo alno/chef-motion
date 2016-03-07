@@ -1,7 +1,7 @@
 
 include_recipe "monit"
 
-monitrc "motion" do
-  source "motion.monitrc.erb"
+monit_monitrc "motion" do
+  template_source "motion.monitrc.erb"
   variables node[:motion]
 end
