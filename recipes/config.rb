@@ -11,7 +11,7 @@ template "/etc/motion/motion.conf" do
   mode "0640"
 
   source "motion.conf.erb"
-  variables node[:motion]
+  variables node['motion']
 
   notifies :restart, "service[motion]", :delayed
 end
@@ -24,7 +24,7 @@ file "/etc/default/motion" do
   content "start_motion_daemon=yes"
 end
 
-node[:motion][:threads].each do |name, conf|
+node['motion']['threads'].each do |name, conf|
 
   template "/etc/motion/thread-#{name}.conf" do
     owner "root"
@@ -32,7 +32,7 @@ node[:motion][:threads].each do |name, conf|
     mode "0640"
 
     source "motion-thread.conf.erb"
-    variables Mash.new(:name => name).merge(conf)
+    variables Mash.new(name: name).merge(conf)
 
     notifies :restart, "service[motion]", :delayed
   end

@@ -25,11 +25,11 @@ template "/etc/init.d/motion" do
   owner "root"
   group "root"
   mode "0755"
-  variables node[:motion]
+  variables node['motion']
 end
 
 service "motion" do
-  supports :status => true, :restart => true, :reload => true
+  supports status: true, restart: true, reload: true
   action :start
 end
 
@@ -47,11 +47,11 @@ bash "compile_motion" do
     wget http://www.lavrsen.dk/foswiki/pub/Motion/OggTimelapse/ogg_theora_codec.diff
     patch < ogg_theora_codec.diff
 
-    ./configure --prefix #{node[:motion][:prefix]}
+    ./configure --prefix #{node['motion']['prefix']}
     make && make install
   EOH
 
-  not_if { File.exists? "#{node[:motion][:prefix]}/bin/motion" }
+  not_if { File.exists? "#{node['motion']['prefix']}/bin/motion" }
 
   notifies :restart, "service[motion]"
 end

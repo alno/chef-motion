@@ -1,1 +1,1 @@
-default[:motion][:prefix] = '/opt/motion'
+default['motion']['prefix'] = '/opt/motion'
