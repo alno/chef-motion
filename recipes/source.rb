@@ -1,11 +1,6 @@
 source_dir = Chef::Config['file_cache_path'] || '/tmp'
 
-package 'libavcodec-dev'
-package 'libavformat-dev'
-package 'libjpeg-dev'
-package 'libpq-dev'
-package 'libv4l-dev'
-package 'dpkg-dev'
+package %w(libavcodec-dev libavformat-dev libjpeg-dev libpq-dev libv4l-dev dpkg-dev)
 
 group "motion"
 user "motion" do
