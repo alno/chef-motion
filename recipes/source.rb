@@ -51,7 +51,7 @@ bash "compile_motion" do
     make && make install
   EOH
 
-  not_if { File.exists? "#{node['motion']['prefix']}/bin/motion" }
+  not_if { ::File.exists? "#{node['motion']['prefix']}/bin/motion" }
 
   notifies :restart, "service[motion]"
 end
