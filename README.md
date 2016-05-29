@@ -36,6 +36,9 @@ The following platforms are supported by this cookbook, meaning that the recipes
 
 ## Contributors
 
+## Code Status
+
+[![Build Status](https://api.travis-ci.org/alno/chef-motion.svg?branch=master)](https://travis-ci.org/chef-motion)
 
 ## License
 
