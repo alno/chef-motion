@@ -2,35 +2,35 @@ source_dir = Chef::Config['file_cache_path'] || '/tmp'
 
 package %w(libavcodec-dev libavformat-dev libjpeg-dev libpq-dev libv4l-dev dpkg-dev)
 
-group "motion"
-user "motion" do
-  gid "motion"
+group 'motion'
+user 'motion' do
+  gid 'motion'
   system true
-  shell "/bin/false"
+  shell '/bin/false'
 end
 
-group "video" do
+group 'video' do
   action :modify
-  members "motion"
+  members 'motion'
   append true
 end
 
-template "/etc/init.d/motion" do
-  source "motion.init.erb"
-  owner "root"
-  group "root"
-  mode "0755"
+template '/etc/init.d/motion' do
+  source 'motion.init.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
   variables node['motion']
 end
 
-service "motion" do
+service 'motion' do
   supports status: true, restart: true, reload: true
   action :start
 end
 
 include_recipe 'motion::config'
 
-bash "compile_motion" do
+bash 'compile_motion' do
   cwd source_dir
   code <<-EOH
     ln -s /usr/lib/*/{libavcodec,libavformat}.{a,so} /usr/lib
@@ -46,7 +46,7 @@ bash "compile_motion" do
     make && make install
   EOH
 
-  not_if { ::File.exists? "#{node['motion']['prefix']}/bin/motion" }
+  not_if { ::File.exist? "#{node['motion']['prefix']}/bin/motion" }
 
-  notifies :restart, "service[motion]"
+  notifies :restart, 'service[motion]'
 end
