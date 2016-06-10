@@ -15,5 +15,5 @@ install: chef exec bundle install
 before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
 
 script:
-# Run test-kitchen with docker driver, for example:
 - KITCHEN_LOCAL_YAML=.kitchen.travis.yml chef exec bundle exec kitchen verify ${INSTANCE}
+- bundle exec rubocop
