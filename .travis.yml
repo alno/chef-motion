@@ -16,4 +16,4 @@ before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
 
 script:
 - KITCHEN_LOCAL_YAML=.kitchen.travis.yml chef exec bundle exec kitchen verify ${INSTANCE}
-- bundle exec rubocop
+- chef exec bundle exec rubocop
